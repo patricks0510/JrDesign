@@ -9,95 +9,96 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly
-  int score = 0;
-  int userIn = 0;
-  
-  bool playing = false;
-
   if(digitalRead(3) == HIGH)
   {
-    playing = true;
-  }
-  else
-  {
-    playing = false;
-  }
-
-  if(playing = true)
-  {
-    digitalWrite(6,HIGH);
-    score = 0;
-    int t_limit = 3000;
-
-    while(playing == true)
+    for(int threeLoops = 3; threeLoops > 0; threeLoops--)
     {
-      //random instruction 
-      int e_input = random(10,12);
-      int t_remain = t_limit;
-
-      //turn on LEDs in place of instruction sound
-      digitalWrite(e_input,HIGH);
+      switch(threeLoops)
+      {
+        int counter = 300;
+        case 3:
+          digitalWrite(10,HIGH);
+          delay(20);
+          
+          while(counter>0)
+          {
+            if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH)
+            {
+              flash(5);
+              delay(10);
+              break;
+            }
+            else if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH  || analogRead(A2) < 400)
+            {
+              flash(7);
+              delay(10);
+              break;
+            }
+            else
+            {
+              flash(6);
+              delay(10);
+            }
+            counter--;
+          }
+          break;
+        case 2:
+          digitalWrite(11,HIGH);
+          delay(20);
+          
+          while(counter>0)
+          {
+            if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
+            {
+              flash(5);
+              delay(10);
+              break;
+            }
+            else if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH || analogRead(A2) < 400)
+            {
+              flash(7);
+              delay(10);
+              break;
+            }
+            else
+            {
+              flash(6);
+              delay(10);
+            }
+            counter--;
+          }
+          break;
+        case 1:
+          digitalWrite(12,HIGH);
+          delay(20);
+          
+          while(counter>0)
+          {
+            if(analogRead(A2) < 400)
+            {
+              flash(5);
+              
+            }
+            else if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH || digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
+            {
+              flash(7);
+              delay(10);
+              break;
+            }
+            else
+            {
+              flash(6);
+              delay(10);
+            }
+            counter--;
+          }
+          break;
+      }
 
       
-      while(t_remaining > 0){
-          //take in user's input
-          //if fret buttons hit
-          if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH )
-          {
-              //set user input switch case controller
-              userIn = 10;
-              //break out of while loop to get next instruction
-              break;
-          }
-          //if strummer moved
-          else if(digitalRead(23) == HIGH || digitalRead(24) == HIGH )
-          {  
-              userIn = 11;
-              break;
-          }
-          //if whammy bar flexed
-          else if(analogRead(25) <= 500)
-          {
-              userIn = 12;
-              break;
-          }
-          //no input given
-          else
-          {
-              userIn = 0;
-              break;
-          }
-          //delay and decrement remaining time
-          delay(10);
-          t_remaining -= 10;
-      }
-      if(e_input == userIn)
-      {
-        score++;
-        //flash green LED
-        flash(5);
-
-        e_input = 0;
-        userIn = 0;
-
-        t_limit -= 10;
-      }
-      else
-      {
-        playing = false;
-        digitalWrite(6,LOW);
-        flash(7);
-      }
-    }
-    for(int i = 0; i<score;i++)
-    {
-      flash(5);
+      threeLoops--;
     }
   }
-
-
-
-  
 }
 
 void pinInit()
@@ -129,11 +130,17 @@ void pinInit()
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
+  digitalWrite(5,LOW);
+  digitalWrite(6,LOW);
+  digitalWrite(7,LOW);
 
   //LEDs replacing sounds
   pinMode(10,OUTPUT);
   pinMode(11,OUTPUT);
   pinMode(12,OUTPUT);
+  digitalWrite(10,LOW);
+  digitalWrite(11,LOW);
+  digitalWrite(12,LOW);
 
   return;
 }
