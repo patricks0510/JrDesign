@@ -11,14 +11,20 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  if(digitalRead(23,HIGH))
+  if(digitalRead(23) == HIGH)
   {
     digitalWrite(11,HIGH);
     delay(30);
+    digitalWrite(12,LOW);
+    delay(30);
   }
-  if(digitalRead(24,HIGH))
+  if(digitalRead(24) == HIGH)
   {
     digitalWrite(12,HIGH);
     delay(30);
+    digitalWrite(12,LOW);
+    delay(30);
+    
   }
+  
 }
