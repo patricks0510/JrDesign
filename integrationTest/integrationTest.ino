@@ -5,100 +5,138 @@ void setup() {
   digitalWrite(6,HIGH);
   delay(100);
   digitalWrite(6,LOW);
+  delay(150);
+  digitalWrite(7,HIGH);
+  delay(150);
+  digitalWrite(7,LOW);
+  delay(150);
+  digitalWrite(10,HIGH);
+  delay(150);
+  digitalWrite(10,LOW);
 }
 
 void loop() {
   // put your main code here, to run repeatedly
-  if(digitalRead(3) == HIGH)
-  {
-    for(int threeLoops = 3; threeLoops > 0; threeLoops--)
-    {
-      switch(threeLoops)
+  
+//  if(digitalRead(3) == HIGH)
+//  {
+//    for(int threeLoops = 300; threeLoops > 0; threeLoops--)
+//    {
+//      switch(threeLoops%3+1)
+//      {
+//        int counter = 300;
+//        case 3:
+//          digitalWrite(10,HIGH);
+//          delay(20);
+//          
+//          while(counter>0)
+//          {
+//            if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH)
+//            {
+//              flash(5);
+//              delay(10);
+//              break;
+//            }
+//            else if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH  || analogRead(A2) < 400)
+//            {
+//              flash(7);
+//              delay(10);
+//              break;
+//            }
+//            else
+//            {
+//              flash(6);
+//              delay(10);
+//            }
+//            counter--;
+//          }
+//          break;
+//        case 2:
+//          digitalWrite(11,HIGH);
+//          delay(20);
+//          
+//          while(counter>0)
+//          {
+//            
+//            else if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH || analogRead(A2) < 400)
+//            {
+//              flash(7);
+//              delay(10);
+//              break;
+//            }
+//            else
+//            {
+//              flash(6);
+//              delay(10);
+//            }
+//            counter--;
+//          }
+//          break;
+//        case 1:
+//          digitalWrite(12,HIGH);
+//          delay(20);
+//          
+//          while(counter>0)
+//          {
+//            if(analogRead(A2) < 400)
+//            {
+//              flash(5);
+//              
+//            }
+//            else if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH || digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
+//            {
+//              flash(7);
+//              delay(10);
+//              break;
+//            }
+//            else
+//            {
+//              flash(6);
+//              delay(10);
+//            }
+//            counter--;
+//          }
+//          break;
+//      }
+//      threeLoops--;
+//    }
+      if(analogRead(A2) > 420)// || analogRead(A1) > 800)
       {
-        int counter = 300;
-        case 3:
-          digitalWrite(10,HIGH);
-          delay(20);
-          
-          while(counter>0)
-          {
-            if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH)
-            {
-              flash(5);
-              delay(10);
-              break;
-            }
-            else if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH  || analogRead(A2) < 400)
-            {
-              flash(7);
-              delay(10);
-              break;
-            }
-            else
-            {
-              flash(6);
-              delay(10);
-            }
-            counter--;
-          }
-          break;
-        case 2:
-          digitalWrite(11,HIGH);
-          delay(20);
-          
-          while(counter>0)
-          {
-            if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
-            {
-              flash(5);
-              delay(10);
-              break;
-            }
-            else if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH || analogRead(A2) < 400)
-            {
-              flash(7);
-              delay(10);
-              break;
-            }
-            else
-            {
-              flash(6);
-              delay(10);
-            }
-            counter--;
-          }
-          break;
-        case 1:
-          digitalWrite(12,HIGH);
-          delay(20);
-          
-          while(counter>0)
-          {
-            if(analogRead(A2) < 400)
-            {
-              flash(5);
-              
-            }
-            else if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH || digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
-            {
-              flash(7);
-              delay(10);
-              break;
-            }
-            else
-            {
-              flash(6);
-              delay(10);
-            }
-            counter--;
-          }
-          break;
+        flash(7);
+        flash(6);
+        delay(10);
       }
-
+      if(analogRead(A0) > 200)
+      {
+        flash(5);
+        flash(6);
+        delay(10);
+      }
+      if(digitalRead(3) == HIGH)
+      {
+        flash(5);
+        flash(7);
+        delay(10);
+      }
+      if(digitalRead(2) == HIGH)
+      {
+        flash(5);
+        flash(6);
+        flash(7);
+        delay(10);
+      }
+//      if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
+//      {
+//        flash(6);
+//        delay(10);
+//      }
+//      if(analogRead(A2) > 450)
+//      {
+//        flash(7);
+//        delay(10);
+//      }
       
-      threeLoops--;
-    }
-  }
+//  }
 }
 
 void pinInit()
@@ -130,17 +168,17 @@ void pinInit()
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
-  digitalWrite(7,LOW);
+  //digitalWrite(5,LOW);
+  //digitalWrite(6,LOW);
+  //digitalWrite(7,LOW);
 
   //LEDs replacing sounds
   pinMode(10,OUTPUT);
   pinMode(11,OUTPUT);
   pinMode(12,OUTPUT);
-  digitalWrite(10,LOW);
-  digitalWrite(11,LOW);
-  digitalWrite(12,LOW);
+  //digitalWrite(10,LOW);
+  //digitalWrite(11,LOW);
+  //digitalWrite(12,LOW);
 
   return;
 }
@@ -148,7 +186,8 @@ void pinInit()
 void flash(int pinout)
 {
     digitalWrite(pinout,HIGH);
-    delay(10);
+    delay(100);
     digitalWrite(pinout,LOW);
+    delay(100);
     return;
 }
