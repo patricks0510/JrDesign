@@ -1,17 +1,19 @@
 void setup() {
   // put your setup code here, to run once:
   pinInit();
-  digitalWrite(6,HIGH);
-  delay(100);
-  digitalWrite(6,LOW);
-  delay(150);
-  digitalWrite(7,HIGH);
-  delay(150);
-  digitalWrite(7,LOW);
-  delay(150);
-  digitalWrite(10,HIGH);
-  delay(150);
-  digitalWrite(10,LOW);
+//  digitalWrite(6,HIGH);
+//  delay(100);
+//  digitalWrite(6,LOW);
+//  delay(150);
+//  digitalWrite(7,HIGH);
+//  delay(150);
+//  digitalWrite(7,LOW);
+//  delay(150);
+//  digitalWrite(10,HIGH);
+//  delay(150);
+//  digitalWrite(10,LOW);
+
+  randomSeed(analogRead(A3));
 }
 
 void loop() {
