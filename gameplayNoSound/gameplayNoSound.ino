@@ -22,18 +22,19 @@ void loop() {
   if(digitalRead(3) == HIGH)
   {
     playing = true;
+  }
     
-    flash(5);
-    flash(6);
-    flash(7);
+//    flash(5);
+//    flash(6);
+//    flash(7);
+//
+//    flash(10);
+//    flash(11);
+//    flash(12);
 
-    flash(10);
-    flash(11);
-    flash(12);
-
     
     
-    while(playing = true) {
+    while(playing == true) {
       //digitalWrite(number+9,HIGH);
       int number = random(1,4);
       int counter = 300;
@@ -150,7 +151,6 @@ void loop() {
             }
             break;
         }
-    }  
   delay(30);
   }
 }
