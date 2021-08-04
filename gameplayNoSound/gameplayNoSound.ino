@@ -17,27 +17,18 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly
+  // put your main code here, to run repeatedly   //unit test -> integration tests -> system tests
   bool playing = false;
+  int score;
   if(digitalRead(3) == HIGH)
   {
+    score = 0;
     playing = true;
   }
-    
-//    flash(5);
-//    flash(6);
-//    flash(7);
-//
-//    flash(10);
-//    flash(11);
-//    flash(12);
-
-    
-    
-    while(playing == true) {
+    while(playing == true && score < 99) {
       //digitalWrite(number+9,HIGH);
       int number = random(1,4);
-      int counter = 300;
+      int counter = 300 - score*2;
       switch(number)
       {
           //whammy it
@@ -49,6 +40,7 @@ void loop() {
             {
               if(analogRead(A2) > 420)
               {
+                score++;
                 digitalWrite(12,LOW);
                 flash(5);
                 delay(10);
@@ -84,6 +76,7 @@ void loop() {
             {
                 if(digitalRead(A0) == HIGH || digitalRead(A1) == HIGH)
                 {
+                  score++;
                   digitalWrite(11,LOW);
                   flash(5);
                   delay(10);
@@ -119,6 +112,7 @@ void loop() {
             {
               if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH)
               {
+                score++;
                 digitalWrite(10,LOW);
                 flash(5);
                 delay(10);
