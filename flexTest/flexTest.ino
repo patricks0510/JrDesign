@@ -7,12 +7,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-//  while(analogRead(25) <= 500)
-//  {
-//    digitalWrite(13,HIGH);
-//    delay(30);
-//  }
-//  digitalWrite(13,LOW);
+ while(analogRead(25) <= 440 || analogRead(25) >= 612)
+ {
+   digitalWrite(13,HIGH);
+   delay(30);
+ }
+ digitalWrite(13,LOW);
 
-    digitalWrite(13,HIGH);
 }
