@@ -27,45 +27,67 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly   //unit test -> integration tests -> system tests
+  
+  //keeping track of gameplay status and score
   bool playing = false;
   int score;
+
+  //if the start button is hit, the player starts playing with a score of 0
   if(digitalRead(3) == HIGH)
   {
     score = 0;
     playing = true;
   }
+    //gameplay while loop  
     while(playing == true && score < 99) {
       //digitalWrite(number+9,HIGH);
+      
+      //generate random number 1-3 for expected input
       int number = random(1,4);
+      //window of time to get correct input scales down as score goes up
       int counter = 300 - score*2;
+      
       switch(number)
       {
           //whammy it
           case 3:
+          //play corresponding instruction
           audioSD.play("Wham.wav");
+          //write LED high (for when sound did not work)
             digitalWrite(12,HIGH);
             //delay(20);
-            
+
+            //only read input if input window has not closed
             while(counter>0)
             {
+              //if correct input
               if(analogRead(A2) > 420)
               {
+                //increment score
                 score++;
+                //turn off LED (when no sound)
                 digitalWrite(12,LOW);
+                //flash green LED
                 flash(5);
                 delay(10);
+                //break out of while loop to generate new expected input
                 break;
               }
+              //if wrong input
               else if(digitalRead(1) == HIGH || digitalRead(2) == HIGH || digitalRead(4) == HIGH  || digitalRead(A0) == HIGH || digitalRead(A1) == HIGH)
               {
+                //game stops
                 playing = false;
                 digitalWrite(12,LOW);
+                //red LED flashes
                 flash(7);
                 delay(10);
                 break;
               }
+              //if no input
               else
               {
+                //flash yellow led and continue
                 flash(6);
                 delay(10);
               }
@@ -149,7 +171,7 @@ void loop() {
             flash(7);
             delay(10);
             break;
-  
+          //debugging flashing light for if RNG goes outside of expected bounds
           default:
             for(int i = 0; i < 10; i++)
             {
