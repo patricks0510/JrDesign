@@ -21,15 +21,18 @@
     The isPlaying() disable() or noInterrupts()
     functions can be used to prevent parallel code execution.
  */
- TMRpcm audio;
+ TMRpcm audioSD;
 void setup() {
   // put your setup code here, to run once:
   
-  pinMode(11,OUTPUT);
-  audio.speakerPin = 11;
+  pinMode(9,OUTPUT);
+  audioSD.speakerPin = 9;
+
+  audioSD.setVolume(4);
+  audioSD.play("GTR.wav");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  audio.play("test.wav");
+  
 }
